@@ -5,6 +5,7 @@ import { HeroStats } from "../hero/components/HeroStats";
 import { HeroGrid } from "../hero/components/HeroGrid";
 import { useState } from "react";
 import CustomPagination from "@/components/custom/CustomPagination";
+import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs";
 
 export const HomePage = () => {
   const [activeTab, setActiveTab] = useState<
@@ -17,6 +18,8 @@ export const HomePage = () => {
         title="Universo de los SuperHeroes"
         description="Descrubre, explora y administra super heroes y villanos"
       />
+
+      <CustomBreadcrumbs />
 
       {/* Stats Dashboard */}
       <HeroStats />

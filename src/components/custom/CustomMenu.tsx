@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 const CustomMenu = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  console.log({ pathname });
 
   const isActive = (path: string) => {
     return path === pathname;

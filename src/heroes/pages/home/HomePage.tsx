@@ -6,11 +6,28 @@ import { HeroGrid } from "../hero/components/HeroGrid";
 import { useState } from "react";
 import CustomPagination from "@/components/custom/CustomPagination";
 import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs";
+import { getHeroesByPage } from "../hero/actions/get-heroes-by-page.action";
+import { useQuery } from "@tanstack/react-query";
 
 export const HomePage = () => {
   const [activeTab, setActiveTab] = useState<
     "all" | "favorites" | "heroes" | "villains"
   >("all");
+
+  // useEffect(() => {
+  //   getHeroesByPage()
+  //     .then((heroes) => {
+  //       console.log({ heroes });
+  //     })
+  //     .catch(() => console.log("nalgas, error al llamar a la api"));
+  // });
+
+  const {} = useQuery({
+    queryKey: ["heroes"],
+    queryFn: () => getHeroesByPage(),
+    staleTime: 1000 * 60 * 5, //5 minutos
+  });
+
   return (
     <>
       {/* Header */}
@@ -21,12 +38,12 @@ export const HomePage = () => {
 
       <CustomBreadcrumbs
         currentPage="super Heroes"
-        breadCrumbs={[
-          { label: "heroes", to: "/" },
-          { label: "heroes", to: "/" },
-          { label: "heroes", to: "/" },
-          { label: "heroes", to: "/" },
-        ]}
+        // breadCrumbs={[
+        //   { label: "heroes", to: "/" },
+        //   { label: "heroes", to: "/" },
+        //   { label: "heroes", to: "/" },
+        //   { label: "heroes", to: "/" },
+        // ]}
       />
 
       {/* Stats Dashboard */}

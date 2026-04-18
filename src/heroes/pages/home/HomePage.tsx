@@ -79,7 +79,7 @@ export const HomePage = () => {
         <TabsContent value="all">
           <h1>todos los personajes</h1>
           {/* Hero Cards */}
-          <HeroGrid />
+          <HeroGrid heroes={heroesResponse?.heroes ?? []} />
         </TabsContent>
         <TabsContent value="favorites">
           <h1>personajes favoritos</h1>

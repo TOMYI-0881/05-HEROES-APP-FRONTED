@@ -1,10 +1,16 @@
-import type { Length } from "node_modules/@base-ui/react/esm/floating-ui-react";
+import type { Hero } from "@/heroes/types/heroes.interface";
 import { HeroGridCard } from "./HeroGridCard";
 
-export const HeroGrid = () => {
+interface Props {
+  heroes: Hero[];
+}
+
+export const HeroGrid = ({ heroes }: Props) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-      <HeroGridCard />
+      {heroes.map((i) => (
+        <HeroGridCard heroe={i} />
+      ))}
     </div>
   );
 };

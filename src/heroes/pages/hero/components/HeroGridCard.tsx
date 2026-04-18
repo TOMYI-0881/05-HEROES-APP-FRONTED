@@ -2,17 +2,20 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { queryClient } from "@/HeroesApp";
+import type { Hero } from "@/heroes/types/heroes.interface";
 import { Brain, Eye, Gauge, Heart, Shield, Zap } from "lucide-react";
 
-export const HeroGridCard = () => {
-  const heroes = queryClient.getQueryData(["heroes"]);
+interface Props {
+  heroe: Hero;
+}
+
+export const HeroGridCard = ({ heroe }: Props) => {
   return (
-    <Card className="w-72 group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
+    <Card className="w-96 group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
       <div className="relative h-64 overflow-hidden">
         <img
-          src="/placeholder.svg?height=300&width=300"
-          alt="Superman"
+          src={heroe.image}
+          alt={heroe.name}
           className="object-cover transition-all duration-500 group-hover:scale-110"
         />
 
@@ -23,13 +26,13 @@ export const HeroGridCard = () => {
             variant="secondary"
             className="text-xs bg-white/90 text-gray-700"
           >
-            Active
+            {heroe.status}
           </Badge>
         </div>
 
         {/* Universe badge */}
         <Badge className="absolute top-3 right-3 text-xs bg-blue-600 text-white">
-          DC
+          {heroe.universe}
         </Badge>
 
         {/* Favorite button */}
@@ -54,22 +57,21 @@ export const HeroGridCard = () => {
       <CardHeader className="pb-3">
         <div className="flex justify-between items-start">
           <div className="space-y-1">
-            <h3 className="font-bold text-lg leading-tight">Superman</h3>
-            <p className="text-sm text-gray-600">Clark Kent</p>
+            <h3 className="font-bold text-lg leading-tight">{heroe.alias}</h3>
+            <p className="text-sm text-gray-600">{heroe.name}</p>
           </div>
           <Badge className="text-xs bg-green-100 text-green-800 border-green-200">
-            Hero
+            {heroe.category}
           </Badge>
         </div>
         <Badge variant="outline" className="w-fit text-xs">
-          Justice League
+          {heroe.team}
         </Badge>
       </CardHeader>
 
       <CardContent className="space-y-4">
         <p className="text-sm text-gray-600 line-clamp-2">
-          The Last Son of Krypton, protector of Earth and symbol of hope for all
-          humanity.
+          {heroe.description}
         </p>
 
         {/* Stats */}
@@ -79,28 +81,44 @@ export const HeroGridCard = () => {
               <Zap className="h-3 w-3 text-orange-500" />
               <span className="text-xs font-medium">Strength</span>
             </div>
-            <Progress value={40} className="h-2" activeColor="bg-orange-500" />
+            <Progress
+              value={heroe.strength * 10}
+              className="h-2"
+              activeColor="bg-orange-500"
+            />
           </div>
           <div className="space-y-1">
             <div className="flex items-center gap-1">
               <Brain className="h-3 w-3 text-blue-500" />
               <span className="text-xs font-medium">Intelligence</span>
             </div>
-            <Progress value={80} className="h-2" activeColor="bg-blue-500" />
+            <Progress
+              value={heroe.intelligence * 10}
+              className="h-2"
+              activeColor="bg-blue-500"
+            />
           </div>
           <div className="space-y-1">
             <div className="flex items-center gap-1">
               <Gauge className="h-3 w-3 text-green-500" />
               <span className="text-xs font-medium">Speed</span>
             </div>
-            <Progress value={90} className="h-2" activeColor="bg-green-500" />
+            <Progress
+              value={heroe.speed * 10}
+              className="h-2"
+              activeColor="bg-green-500"
+            />
           </div>
           <div className="space-y-1">
             <div className="flex items-center gap-1">
               <Shield className="h-3 w-3 text-purple-500" />
               <span className="text-xs font-medium">Durability</span>
             </div>
-            <Progress value={100} className="h-2" activeColor="bg-purple-500" />
+            <Progress
+              value={heroe.durability * 10}
+              className="h-2"
+              activeColor="bg-purple-500"
+            />
           </div>
         </div>
 

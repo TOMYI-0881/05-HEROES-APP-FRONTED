@@ -32,9 +32,9 @@ const CustomPagination = ({ totalPages }: Props) => {
         2
       </Button> */}
 
-      <Button variant="ghost" size="sm" disabled>
+      {/* <Button variant="ghost" size="sm" disabled>
         <MoreHorizontal className="h-4 w-4" />
-      </Button>
+      </Button> */}
 
       <Button variant="outline" size="sm" disabled={page === totalPages}>
         siguiente

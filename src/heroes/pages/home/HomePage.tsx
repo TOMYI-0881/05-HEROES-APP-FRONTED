@@ -77,24 +77,23 @@ export const HomePage = () => {
         </TabsList>
 
         <TabsContent value="all">
-          <h1>todos los personajes</h1>
           {/* Hero Cards */}
           <HeroGrid heroes={heroesResponse?.heroes ?? []} />
         </TabsContent>
         <TabsContent value="favorites">
           <h1>personajes favoritos</h1>
           {/* Hero Cards */}
-          <HeroGrid />
+          <HeroGrid heroes={[]} />
         </TabsContent>
         <TabsContent value="heroes">
           <h1>heroes</h1>
           {/* Hero Cards */}
-          <HeroGrid />
+          <HeroGrid heroes={[]} />
         </TabsContent>
         <TabsContent value="villains">
           <h1>villanos</h1>
           {/* Hero Cards */}
-          <HeroGrid />
+          <HeroGrid heroes={[]} />
         </TabsContent>
       </Tabs>
 
@@ -111,7 +110,7 @@ export const HomePage = () => {
         */}
 
       {/* Pagination */}
-      <CustomPagination totalPages={3} />
+      <CustomPagination totalPages={5} />
     </>
   );
 };

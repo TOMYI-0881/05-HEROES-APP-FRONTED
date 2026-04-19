@@ -3,35 +3,54 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import type { Hero } from "@/heroes/types/heroes.interface";
+import { cn } from "@/lib/utils";
 import { Brain, Eye, Gauge, Heart, Shield, Zap } from "lucide-react";
+import { useNavigate } from "react-router";
 
 interface Props {
   heroe: Hero;
 }
 
 export const HeroGridCard = ({ heroe }: Props) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("heroe/1");
+  };
+
   return (
     <Card className="w-96 group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-64 ">
         <img
+          onClick={handleClick}
           src={heroe.image}
           alt={heroe.name}
-          className="object-cover transition-all duration-500 group-hover:scale-110"
+          className="cursor-pointer object-cover transition-all duration-500 group-hover:scale-110 absolute top-[-30px] w-full h-[410px]"
         />
 
         {/* Status indicator */}
         <div className="absolute top-3 left-3 flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-green-500" />
+          <div
+            className={cn(
+              `w-3 h-3 rounded-full ${heroe.status === "Active" ? "bg-green-500" : "bg-red-600"}`,
+            )}
+          />
           <Badge
             variant="secondary"
-            className="text-xs bg-white/90 text-gray-700"
+            className={cn(
+              `text-xs ${heroe.status === "Active" ? "bg-green-500/90" : "bg-red-600/90"}  text-shadow-black`,
+            )}
           >
             {heroe.status}
           </Badge>
         </div>
 
         {/* Universe badge */}
-        <Badge className="absolute top-3 right-3 text-xs bg-blue-600 text-white">
+        <Badge
+          className={cn(
+            `absolute top-3 right-3 text-xs ${heroe.universe === "DC" ? " bg-blue-600 text-white" : " bg-red-600 text-white"}`,
+          )}
+        >
           {heroe.universe}
         </Badge>
 
@@ -54,13 +73,17 @@ export const HeroGridCard = ({ heroe }: Props) => {
         </Button>
       </div>
 
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-3 py-3 z-10 bg-gray-100/50 backdrop-blur-sm relative top-1 group-hover:top-[-10px] transition-all duration-300">
         <div className="flex justify-between items-start">
           <div className="space-y-1">
             <h3 className="font-bold text-lg leading-tight">{heroe.alias}</h3>
             <p className="text-sm text-gray-600">{heroe.name}</p>
           </div>
-          <Badge className="text-xs bg-green-100 text-green-800 border-green-200">
+          <Badge
+            className={cn(
+              `${heroe.category === "Hero" ? "bg-green-100 text-green-800 border-green-200" : "bg-red-200 text-black border-red-200"},"text-xs"`,
+            )}
+          >
             {heroe.category}
           </Badge>
         </div>
@@ -69,7 +92,7 @@ export const HeroGridCard = ({ heroe }: Props) => {
         </Badge>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 mt-4.5">
         <p className="text-sm text-gray-600 line-clamp-2">
           {heroe.description}
         </p>
@@ -126,20 +149,22 @@ export const HeroGridCard = ({ heroe }: Props) => {
         <div className="space-y-2">
           <h4 className="font-medium text-sm">Powers:</h4>
           <div className="flex flex-wrap gap-1">
-            <Badge variant="outline" className="text-xs">
-              Super Strength
-            </Badge>
-            <Badge variant="outline" className="text-xs">
-              Flight
-            </Badge>
-            <Badge variant="outline" className="text-xs bg-gray-100">
-              +4 more
-            </Badge>
+            {heroe.powers.slice(0, 3).map((v, i) => (
+              <Badge variant="outline" className="text-xs" key={i}>
+                {v}
+              </Badge>
+            ))}
+
+            {heroe.powers.length > 3 && (
+              <Badge variant="outline" className="text-xs bg-gray-100">
+                + {heroe.powers.length - 3} más
+              </Badge>
+            )}
           </div>
         </div>
 
         <div className="text-xs text-gray-500 pt-2 border-t">
-          First appeared: 1938
+          Primera aparicion: {heroe.firstAppearance}
         </div>
       </CardContent>
     </Card>

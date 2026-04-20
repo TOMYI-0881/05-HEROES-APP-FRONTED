@@ -1,8 +1,11 @@
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 
 const HeroPage = () => {
-  const params = useParams();
-  console.log({ params });
+  const { idSlug = "" } = useParams();
+  console.log({ idSlug });
+
+  const { pathname: LALA } = useLocation();
+  console.log({ LALA });
   return <div>HeroPage</div>;
 };
 

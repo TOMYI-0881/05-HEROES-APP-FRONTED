@@ -18,6 +18,7 @@ export const appRouter = createBrowserRouter([
         element: <HomePage />,
       },
       {
+        //pra ruta dimamica, usamos :
         path: "heroe/:idSlug",
         element: <HeroPage />,
       },

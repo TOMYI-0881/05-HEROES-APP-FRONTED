@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 const CustomMenu = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  console.log({ pathname });
 
   const isActive = (path: string) => {
     return path === pathname;
@@ -20,7 +21,7 @@ const CustomMenu = () => {
         {/* Home */}
         <NavigationMenuItem className="bg-indigo-500  text-amber-50 rounded-md hover:text-black">
           <NavigationMenuLink
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/section=all")}
             className={cn(
               isActive("/") && "bg-orange-300 text-black",
               "cursor-pointer",

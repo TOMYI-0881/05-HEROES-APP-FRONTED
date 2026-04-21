@@ -7,7 +7,6 @@ interface Props {
 }
 
 const CustomPagination = ({ totalPages }: Props) => {
-  const def = 2;
   const [page, setPage] = useState(1);
   return (
     <div className="flex items-center justify-center space-x-2">

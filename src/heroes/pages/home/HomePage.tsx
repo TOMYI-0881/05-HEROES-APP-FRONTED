@@ -8,10 +8,19 @@ import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs";
 import { getHeroesByPage } from "../hero/actions/get-heroes-by-page.action";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router";
+import { useMemo } from "react";
 
 export const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTabParams = searchParams.get("section") ?? "all";
+  const page = searchParams.get("page") ?? "1";
+  const limit = searchParams.get("limit") ?? "6";
+
+  //manjear parametros desconocidos dentro de la url
+  const selectTab = useMemo(() => {
+    const validTabs = ["all", "favorites", "heroes", "villains"];
+    return validTabs.includes(activeTabParams) ? activeTabParams : "all";
+  }, [activeTabParams]);
 
   // useEffect(() => {
   //   getHeroesByPage()
@@ -23,7 +32,7 @@ export const HomePage = () => {
 
   const { data: heroesResponse } = useQuery({
     queryKey: ["heroes"],
-    queryFn: () => getHeroesByPage(),
+    queryFn: () => getHeroesByPage(+page, +limit),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
 
@@ -51,7 +60,7 @@ export const HomePage = () => {
       <HeroStats />
 
       {/* Tabs */}
-      <Tabs value={activeTabParams} className="mb-8">
+      <Tabs value={selectTab} className="mb-8">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger
             value="all"
@@ -62,7 +71,7 @@ export const HomePage = () => {
               })
             }
           >
-            All Characters (16)
+            All Characters ({+limit > 25 ? 25 : limit})
           </TabsTrigger>
           <TabsTrigger
             value="favorites"
@@ -135,7 +144,7 @@ export const HomePage = () => {
         */}
 
       {/* Pagination */}
-      <CustomPagination totalPages={5} />
+      <CustomPagination totalPages={heroesResponse?.pages ?? 1} />
     </>
   );
 };

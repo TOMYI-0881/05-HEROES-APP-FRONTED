@@ -31,7 +31,7 @@ export const HomePage = () => {
   // });
 
   const { data: heroesResponse } = useQuery({
-    queryKey: ["heroes"],
+    queryKey: ["heroes", { page: page, limit: limit }],
     queryFn: () => getHeroesByPage(+page, +limit),
     staleTime: 1000 * 60 * 5, //5 minutos
   });

@@ -5,23 +5,16 @@ import { HeroStats } from "../hero/components/HeroStats";
 import { HeroGrid } from "../hero/components/HeroGrid";
 import CustomPagination from "@/components/custom/CustomPagination";
 import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs";
-import { getHeroesByPage } from "../hero/actions/get-heroes-by-page.action";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useSearchParams } from "react-router";
-import { useMemo } from "react";
-import type { SumaryInformationResponse } from "@/heroes/types/sumary-information.response";
+import { useHeroesSumary } from "@/heroes/hooks/useHeroesSumary";
+import { usePaginationHero } from "@/heroes/hooks/usePaginationHero";
+import { useHeroesSearchParams } from "@/heroes/hooks/useHeroesSearchParams";
 
 export const HomePage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const activeTabParams = searchParams.get("section") ?? "all";
-  const page = searchParams.get("page") ?? "1";
-  const limit = searchParams.get("limit") ?? "6";
-
-  //manjear parametros desconocidos dentro de la url
-  const selectTab = useMemo(() => {
-    const validTabs = ["all", "favorites", "heroes", "villains"];
-    return validTabs.includes(activeTabParams) ? activeTabParams : "all";
-  }, [activeTabParams]);
+  // const { data: heroesResponse } = useQuery({
+  //   queryKey: ["heroes", { page: page, limit: limit }],
+  //   queryFn: () => getHeroesByPage(+page, +limit),
+  //   staleTime: 1000 * 60 * 5, //5 minutos
+  // });
 
   // useEffect(() => {
   //   getHeroesByPage()
@@ -31,18 +24,22 @@ export const HomePage = () => {
   //     .catch(() => console.log("nalgas, error al llamar a la api"));
   // });
 
-  const { data: heroesResponse } = useQuery({
-    queryKey: ["heroes"],
-    queryFn: () => getHeroesByPage(+page, +limit),
-    staleTime: 1000 * 60 * 5, //5 minutos
+  const { page, limit, selectTab, handleSearchParams } =
+    useHeroesSearchParams();
+
+  const { data: heroesResponse } = usePaginationHero({
+    page: page,
+    limit: limit,
   });
   console.log({ heroesResponse });
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
-  const heroesSummary = queryClient.getQueryData<SumaryInformationResponse>([
-    "totalHeroesSummary",
-  ]);
+  // const heroesSummary = queryClient.getQueryData<SumaryInformationResponse>([
+  //   "totalHeroesSummary",
+  // ]);
+
+  const { data: heroesSummary } = useHeroesSumary();
 
   return (
     <>
@@ -68,49 +65,26 @@ export const HomePage = () => {
       {/* Tabs */}
       <Tabs value={selectTab} className="mb-8">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger
-            value="all"
-            onClick={() =>
-              setSearchParams((prev) => {
-                prev.set("section", "all");
-                return prev;
-              })
-            }
-          >
+          <TabsTrigger value="all" onClick={() => handleSearchParams("all")}>
             All Characters ({heroesSummary?.totalHeroes})
           </TabsTrigger>
           <TabsTrigger
             value="favorites"
             className="flex items-center gap-2"
-            onClick={() =>
-              setSearchParams((prev) => {
-                prev.set("section", "favorites");
-                return prev;
-              })
-            }
+            onClick={() => handleSearchParams("favorites")}
           >
             <Heart className="h-4 w-4" />
             Favorites (3)
           </TabsTrigger>
           <TabsTrigger
             value="heroes"
-            onClick={() =>
-              setSearchParams((prev) => {
-                prev.set("section", "heroes");
-                return prev;
-              })
-            }
+            onClick={() => handleSearchParams("heroes")}
           >
             Heroes ({heroesSummary?.heroCount})
           </TabsTrigger>
           <TabsTrigger
             value="villains"
-            onClick={() =>
-              setSearchParams((prev) => {
-                prev.set("section", "villains");
-                return prev;
-              })
-            }
+            onClick={() => handleSearchParams("villains")}
           >
             Villains ({heroesSummary?.villainCount})
           </TabsTrigger>

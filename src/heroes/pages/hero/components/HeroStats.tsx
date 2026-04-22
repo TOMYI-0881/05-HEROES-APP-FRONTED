@@ -1,21 +1,31 @@
 import { Badge } from "@/components/ui/badge";
 import { Heart, Trophy, Users, Zap } from "lucide-react";
 import { HeroStatCard } from "./HeroStatCard";
+import { useQuery } from "@tanstack/react-query";
+import { getSumaryAction } from "../actions/get-sumary.action";
 
 export const HeroStats = () => {
+  const { data: heroesSummary, isLoading } = useQuery({
+    queryKey: ["totalHeroesSummary"],
+    queryFn: getSumaryAction,
+    staleTime: 1000 * 60 * 5, //5 minutos
+  });
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
       <HeroStatCard
         title="Total de personajes"
         icon={<Users className="h-4 w-4 text-muted-foreground" />}
       >
-        <div className="text-2xl font-bold">16</div>
+        <div className="text-2xl font-bold">
+          {isLoading ? "cargando" : heroesSummary?.totalHeroes}
+        </div>
         <div className="flex gap-1 mt-2">
           <Badge variant="secondary" className="text-xs">
-            12 Heroes
+            {heroesSummary?.heroCount} Heroes
           </Badge>
           <Badge variant="destructive" className="text-xs">
-            2 Villains
+            {heroesSummary?.villainCount} Villains
           </Badge>
         </div>
       </HeroStatCard>
@@ -32,16 +42,24 @@ export const HeroStats = () => {
         title="Fuerte"
         icon={<Zap className="h-4 w-4 text-muted-foreground" />}
       >
-        <div className="text-lg font-bold">Superman</div>
-        <p className="text-xs text-muted-foreground">Strength: 10/10</p>
+        <div className="text-lg font-bold">
+          {heroesSummary?.strongestHero.alias}
+        </div>
+        <p className="text-xs text-muted-foreground">
+          Strength: {heroesSummary?.strongestHero.strength}/10
+        </p>
       </HeroStatCard>
 
       <HeroStatCard
         title="Inteligente"
         icon={<Trophy className="h-4 w-4 text-muted-foreground" />}
       >
-        <div className="text-lg font-bold">Batman</div>
-        <p className="text-xs text-muted-foreground">Intelligence: 10/10</p>
+        <div className="text-lg font-bold">
+          {heroesSummary?.smartestHero.alias}
+        </div>
+        <p className="text-xs text-muted-foreground">
+          Intelligence: {heroesSummary?.smartestHero.intelligence}/10
+        </p>
       </HeroStatCard>
     </div>
   );

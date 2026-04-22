@@ -6,9 +6,10 @@ import { HeroGrid } from "../hero/components/HeroGrid";
 import CustomPagination from "@/components/custom/CustomPagination";
 import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs";
 import { getHeroesByPage } from "../hero/actions/get-heroes-by-page.action";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "react-router";
 import { useMemo } from "react";
+import type { SumaryInformationResponse } from "@/heroes/types/sumary-information.response";
 
 export const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -31,12 +32,17 @@ export const HomePage = () => {
   // });
 
   const { data: heroesResponse } = useQuery({
-    queryKey: ["heroes", { page: page, limit: limit }],
+    queryKey: ["heroes"],
     queryFn: () => getHeroesByPage(+page, +limit),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
-
   console.log({ heroesResponse });
+
+  const queryClient = useQueryClient();
+
+  const heroesSummary = queryClient.getQueryData<SumaryInformationResponse>([
+    "totalHeroesSummary",
+  ]);
 
   return (
     <>
@@ -71,7 +77,7 @@ export const HomePage = () => {
               })
             }
           >
-            All Characters ({+limit > 25 ? 25 : limit})
+            All Characters ({heroesSummary?.totalHeroes})
           </TabsTrigger>
           <TabsTrigger
             value="favorites"
@@ -95,7 +101,7 @@ export const HomePage = () => {
               })
             }
           >
-            Heroes (12)
+            Heroes ({heroesSummary?.heroCount})
           </TabsTrigger>
           <TabsTrigger
             value="villains"
@@ -106,7 +112,7 @@ export const HomePage = () => {
               })
             }
           >
-            Villains (2)
+            Villains ({heroesSummary?.villainCount})
           </TabsTrigger>
         </TabsList>
 

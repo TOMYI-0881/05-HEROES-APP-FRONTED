@@ -17,7 +17,7 @@ const CustomMenu = () => {
   };
   return (
     <NavigationMenu>
-      <NavigationMenuList className="flex gap-1 ">
+      <NavigationMenuList className="flex gap-1 bg-gray-300 rounded-md p-1">
         {/* Home */}
         <NavigationMenuItem className="bg-indigo-500  text-amber-50 rounded-md hover:text-black">
           <NavigationMenuLink

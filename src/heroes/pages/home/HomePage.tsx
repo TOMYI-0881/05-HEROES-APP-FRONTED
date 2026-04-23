@@ -24,12 +24,15 @@ export const HomePage = () => {
   //     .catch(() => console.log("nalgas, error al llamar a la api"));
   // });
 
-  const { page, limit, selectTab, handleSearchParams } =
+  //obtener valores de la URL
+  const { page, limit, category, selectTab, handleSearchParams } =
     useHeroesSearchParams();
 
+  //Llamamos api filtrada por los parametros
   const { data: heroesResponse } = usePaginationHero({
     page: page,
     limit: limit,
+    category: category,
   });
   console.log({ heroesResponse });
 
@@ -39,6 +42,7 @@ export const HomePage = () => {
   //   "totalHeroesSummary",
   // ]);
 
+  //llamamos API para mostrar datos de los TABS
   const { data: heroesSummary } = useHeroesSumary();
 
   return (
@@ -65,26 +69,29 @@ export const HomePage = () => {
       {/* Tabs */}
       <Tabs value={selectTab} className="mb-8">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="all" onClick={() => handleSearchParams("all")}>
+          <TabsTrigger
+            value="all"
+            onClick={() => handleSearchParams("all", "all")}
+          >
             All Characters ({heroesSummary?.totalHeroes})
           </TabsTrigger>
           <TabsTrigger
             value="favorites"
             className="flex items-center gap-2"
-            onClick={() => handleSearchParams("favorites")}
+            onClick={() => handleSearchParams("favorites", "all")}
           >
             <Heart className="h-4 w-4" />
             Favorites (3)
           </TabsTrigger>
           <TabsTrigger
             value="heroes"
-            onClick={() => handleSearchParams("heroes")}
+            onClick={() => handleSearchParams("heroes", "hero")}
           >
             Heroes ({heroesSummary?.heroCount})
           </TabsTrigger>
           <TabsTrigger
             value="villains"
-            onClick={() => handleSearchParams("villains")}
+            onClick={() => handleSearchParams("villains", "villain")}
           >
             Villains ({heroesSummary?.villainCount})
           </TabsTrigger>
@@ -102,12 +109,12 @@ export const HomePage = () => {
         <TabsContent value="heroes">
           <h1>heroes</h1>
           {/* Hero Cards */}
-          <HeroGrid heroes={[]} />
+          <HeroGrid heroes={heroesResponse?.heroes ?? []} />
         </TabsContent>
         <TabsContent value="villains">
           <h1>villanos</h1>
           {/* Hero Cards */}
-          <HeroGrid heroes={[]} />
+          <HeroGrid heroes={heroesResponse?.heroes ?? []} />
         </TabsContent>
       </Tabs>
 

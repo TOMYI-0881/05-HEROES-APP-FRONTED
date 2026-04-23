@@ -4,12 +4,13 @@ import { getHeroesByPage } from "../pages/hero/actions/get-heroes-by-page.action
 interface Props {
   page: string;
   limit: string;
+  category: string;
 }
 
-export const usePaginationHero = ({ page, limit }: Props) => {
+export const usePaginationHero = ({ page, limit, category }: Props) => {
   return useQuery({
-    queryKey: ["heroes", { page: page, limit: limit }],
-    queryFn: () => getHeroesByPage(+page, +limit),
+    queryKey: ["heroes", { page: page, limit: limit, category: category }],
+    queryFn: () => getHeroesByPage(+page, +limit, category),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
 };

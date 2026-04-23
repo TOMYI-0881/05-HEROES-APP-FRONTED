@@ -3,35 +3,48 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import { useQuery } from "@tanstack/react-query";
 import { Shield, Zap, Brain, Gauge, Users, Star, Award } from "lucide-react";
+import { useParams } from "react-router";
+import { getHeroAction } from "./actions/get-hero.action";
 
-const superheroData = {
-  id: "1",
-  name: "Clark Kent",
-  alias: "Superman",
-  powers: [
-    "Súper fuerza",
-    "Vuelo",
-    "Visión de calor",
-    "Visión de rayos X",
-    "Invulnerabilidad",
-    "Súper velocidad",
-  ],
-  description:
-    "El Último Hijo de Krypton, protector de la Tierra y símbolo de esperanza para toda la humanidad.",
-  strength: 10,
-  intelligence: 8,
-  speed: 9,
-  durability: 10,
-  team: "Liga de la Justicia",
-  image: "/placeholder.svg?height=300&width=300",
-  firstAppearance: "1938",
-  status: "Activo",
-  category: "Héroe",
-  universe: "DC",
-};
+// const superheroData = {
+//   id: "1",
+//   name: "Clark Kent",
+//   alias: "Superman",
+//   powers: [
+//     "Súper fuerza",
+//     "Vuelo",
+//     "Visión de calor",
+//     "Visión de rayos X",
+//     "Invulnerabilidad",
+//     "Súper velocidad",
+//   ],
+//   description:
+//     "El Último Hijo de Krypton, protector de la Tierra y símbolo de esperanza para toda la humanidad.",
+//   strength: 10,
+//   intelligence: 8,
+//   speed: 9,
+//   durability: 10,
+//   team: "Liga de la Justicia",
+//   image: "/placeholder.svg?height=300&width=300",
+//   firstAppearance: "1938",
+//   status: "Activo",
+//   category: "Héroe",
+//   universe: "DC",
+// };
 
 export default function SuperheroProfile() {
+  const { idSlug = "" } = useParams();
+
+  const { data: superheroData } = useQuery({
+    queryKey: ["Hero-data", { idSlug: idSlug }],
+    queryFn: () => getHeroAction(idSlug),
+    staleTime: 1000 * 60 * 5, //5 minutos
+  });
+
+  if (superheroData === undefined) return;
+
   const totalPower =
     superheroData.strength +
     superheroData.intelligence +
@@ -54,12 +67,10 @@ export default function SuperheroProfile() {
 
   const getCategoryColor = (category: string) => {
     switch (category.toLowerCase()) {
-      case "héroe":
+      case "hero":
         return "bg-blue-500";
-      case "villano":
+      case "Villain":
         return "bg-red-500";
-      case "antihéroe":
-        return "bg-purple-500";
       default:
         return "bg-gray-500";
     }
@@ -335,10 +346,31 @@ export default function SuperheroProfile() {
               </CardHeader>
               <CardContent>
                 <div className="text-center py-8">
-                  <div className="bg-green-100 p-6 rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center">
-                    <Users className="w-12 h-12 text-green-600" />
+                  <div
+                    className={cn(
+                      superheroData.category === "Hero"
+                        ? "bg-green-100"
+                        : "bg-red-100",
+                      "p-6 rounded-full w-24 h-24 mx-auto mb-4 flex items-center justify-center",
+                    )}
+                  >
+                    <Users
+                      className={cn(
+                        superheroData.category === "Hero"
+                          ? "text-green-600"
+                          : "text-red-600",
+                        "w-12 h-12",
+                      )}
+                    />
                   </div>
-                  <h3 className="text-2xl font-bold text-green-700 mb-2">
+                  <h3
+                    className={cn(
+                      superheroData.category === "Hero"
+                        ? "text-green-700"
+                        : "text-red-700",
+                      "text-2xl font-bold mb-2",
+                    )}
+                  >
                     {superheroData.team}
                   </h3>
                   <p className="text-gray-600">

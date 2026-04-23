@@ -3,7 +3,7 @@ import { HeroApi } from "../api/hero.api";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-export const getHeroesByPage = async (
+export const getHeroesByPageAction = async (
   page: number,
   limit: number,
   category: string,

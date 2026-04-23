@@ -89,7 +89,9 @@ export default function SuperheroProfile() {
             <div className="flex-1 text-center md:text-left">
               <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
                 <Badge
-                  className={cn(`${getCategoryColor(superheroData.category)}, text-white`)}
+                  className={cn(
+                    `${getCategoryColor(superheroData.category)}, text-white`,
+                  )}
                 >
                   {superheroData.category}
                 </Badge>

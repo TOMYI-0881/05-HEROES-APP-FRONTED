@@ -83,7 +83,7 @@ export default function SuperheroProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-3 rounded-[60px]">
       {/* Header Banner */}
       <div className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-6 py-12">

@@ -16,6 +16,7 @@ export const HomePage = () => {
   //   staleTime: 1000 * 60 * 5, //5 minutos
   // });
 
+  //el useEffect es remplazado por el useQuery en todo lo que se relaciona con la llamada de una api
   // useEffect(() => {
   //   getHeroesByPage()
   //     .then((heroes) => {

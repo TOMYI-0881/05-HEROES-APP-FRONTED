@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { Shield, Zap, Brain, Gauge, Users, Star, Award } from "lucide-react";
-import { useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 import { getHeroAction } from "./actions/get-hero.action";
 
 // const superheroData = {
@@ -37,13 +37,19 @@ import { getHeroAction } from "./actions/get-hero.action";
 export default function SuperheroProfile() {
   const { idSlug = "" } = useParams();
 
-  const { data: superheroData } = useQuery({
+  const { data: superheroData, isError } = useQuery({
     queryKey: ["Hero-data", { idSlug: idSlug }],
     queryFn: () => getHeroAction(idSlug),
     staleTime: 1000 * 60 * 5, //5 minutos
+    //retry evita que se vuelvan hacer intentos de llamar a la API
+    retry: false,
   });
 
-  if (superheroData === undefined) return;
+  if (isError) {
+    return <Navigate to="/" />;
+  }
+
+  if (!superheroData) return <h3>cargando....</h3>;
 
   const totalPower =
     superheroData.strength +

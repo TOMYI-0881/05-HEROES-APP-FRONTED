@@ -2,9 +2,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { FavoriteHeroContexx } from "@/heroes/context/FavoriteHeroContext";
 import type { Hero } from "@/heroes/types/heroes.interface";
 import { cn } from "@/lib/utils";
 import { Brain, Eye, Gauge, Heart, Shield, Zap } from "lucide-react";
+import { use } from "react";
 import { useNavigate } from "react-router";
 
 interface Props {
@@ -12,6 +14,9 @@ interface Props {
 }
 
 export const HeroGridCard = ({ heroe }: Props) => {
+  //llamamos contexto
+  const { toggleFavorite, isFavorite } = use(FavoriteHeroContexx);
+
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -38,7 +43,8 @@ export const HeroGridCard = ({ heroe }: Props) => {
           <Badge
             variant="secondary"
             className={cn(
-              `text-xs ${heroe.status === "Active" ? "bg-green-500/90" : "bg-red-600/90"}  text-shadow-black`,
+              "text-xs text-shadow-black",
+              heroe.status === "Active" ? "bg-green-500/90" : "bg-red-600/90",
             )}
           >
             {heroe.status}
@@ -59,8 +65,14 @@ export const HeroGridCard = ({ heroe }: Props) => {
           size="sm"
           variant="ghost"
           className="absolute bottom-3 right-3 bg-white/90 hover:bg-white"
+          onClick={() => toggleFavorite(heroe)}
         >
-          <Heart className="h-4 w-4 fill-red-500 text-red-500" />
+          <Heart
+            className={cn(
+              "h-4 w-4 text-red-500",
+              isFavorite(heroe) ? "fill-red-500" : "fill-yellow-50",
+            )}
+          />
         </Button>
 
         {/* View details button */}

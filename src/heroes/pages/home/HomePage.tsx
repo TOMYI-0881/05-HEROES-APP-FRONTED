@@ -8,8 +8,11 @@ import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs";
 import { useHeroesSumary } from "@/heroes/hooks/useHeroesSumary";
 import { usePaginationHero } from "@/heroes/hooks/usePaginationHero";
 import { useHeroesSearchParams } from "@/heroes/hooks/useHeroesSearchParams";
+import { use } from "react";
+import { FavoriteHeroContexx } from "@/heroes/context/FavoriteHeroContext";
 
 export const HomePage = () => {
+  const { favoriteCount, favorites } = use(FavoriteHeroContexx);
   // const { data: heroesResponse } = useQuery({
   //   queryKey: ["heroes", { page: page, limit: limit }],
   //   queryFn: () => getHeroesByPage(+page, +limit),
@@ -82,7 +85,7 @@ export const HomePage = () => {
             onClick={() => handleSearchParams("favorites", "all")}
           >
             <Heart className="h-4 w-4" />
-            Favorites (3)
+            Favorites ({favoriteCount})
           </TabsTrigger>
           <TabsTrigger
             value="heroes"
@@ -103,17 +106,14 @@ export const HomePage = () => {
           <HeroGrid heroes={heroesResponse?.heroes ?? []} />
         </TabsContent>
         <TabsContent value="favorites">
-          <h1>personajes favoritos</h1>
           {/* Hero Cards */}
-          <HeroGrid heroes={[]} />
+          <HeroGrid heroes={favorites} />
         </TabsContent>
         <TabsContent value="heroes">
-          <h1>heroes</h1>
           {/* Hero Cards */}
           <HeroGrid heroes={heroesResponse?.heroes ?? []} />
         </TabsContent>
         <TabsContent value="villains">
-          <h1>villanos</h1>
           {/* Hero Cards */}
           <HeroGrid heroes={heroesResponse?.heroes ?? []} />
         </TabsContent>
@@ -132,7 +132,9 @@ export const HomePage = () => {
         */}
 
       {/* Pagination */}
-      <CustomPagination totalPages={heroesResponse?.pages ?? 1} />
+      {selectTab !== "favorites" && (
+        <CustomPagination totalPages={heroesResponse?.pages ?? 1} />
+      )}
     </>
   );
 };

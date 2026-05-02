@@ -2,10 +2,7 @@ import { RouterProvider } from "react-router";
 import { appRouter } from "./router/app.Router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import {
-  FavoriteHeroContex,
-  FavoriteHeroContextProvider,
-} from "./heroes/context/FavoriteHeroContext";
+import { FavoriteHeroContextProvider } from "./heroes/context/FavoriteHeroContext";
 
 export const queryClient = new QueryClient();
 

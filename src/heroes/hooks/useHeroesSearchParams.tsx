@@ -21,7 +21,7 @@ export const useHeroesSearchParams = () => {
   //manjear parametros desconocidos dentro de la url
   const selectTab = useMemo(() => {
     const validTabs = ["all", "favorites", "heroes", "villains"];
-    return validTabs.includes(activeTabParams) ? activeTabParams : "all";
+    return validTabs.includes(activeTabParams) ? activeTabParams : "favorites";
   }, [activeTabParams]);
 
   return {

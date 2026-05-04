@@ -3,15 +3,27 @@ import SearchControler from "./ui/SearchControler";
 import { HeroStats } from "../hero/components/HeroStats";
 import { HeroGrid } from "../hero/components/HeroGrid";
 import { useHeroSearchFilterParams } from "@/heroes/hooks/useHeroSearchFilterParams";
-import { Navigate, useSearchParams } from "react-router";
-import { HeroesLayouts } from "@/heroes/layouts/HeroesLayouts";
+import { useSearchParams } from "react-router";
 
 export const SearchPage = () => {
   const [searchParams] = useSearchParams();
 
-  const name = searchParams.get("name") ?? undefined;
+  const name = searchParams.get("name") ?? "";
+  //valisdamos si hay un termino de busqueda para mostrar un mensaje diferente
+  const hasSearch = name?.trim().length > 0;
 
-  const { data: hereosFilter = [] } = useHeroSearchFilterParams(name);
+  //llamamos API para mostrar datos filtrados por el termino de busqueda
+  const { data: heroesFilter = [] } = useHeroSearchFilterParams(name);
+
+  //contenido dinamico dependiendo del estado de la busqueda
+  let contenido = <span>busca un heroe por su nombre</span>;
+
+  //si hay un termino de busqueda pero no hay resultados, mostramos un mensaje diferente
+  if (hasSearch && heroesFilter.length === 0) {
+    contenido = <span>no hay datos encontrado</span>;
+  } else if (heroesFilter.length > 0) {
+    contenido = <HeroGrid heroes={heroesFilter} />;
+  }
 
   return (
     <>
@@ -26,11 +38,8 @@ export const SearchPage = () => {
       {/* Controls */}
       <SearchControler />
 
-      {hereosFilter.length === 0 ? (
-        <span>no hay datos que mostrar</span>
-      ) : (
-        <HeroGrid heroes={hereosFilter} />
-      )}
+      {/* Hero Grid */}
+      {contenido}
     </>
   );
 };

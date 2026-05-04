@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Shield, Zap, Brain, Gauge, Users, Star, Award } from "lucide-react";
 import { Navigate, useParams } from "react-router";
 import { getHeroAction } from "./actions/get-hero.action";
+import { useHero } from "@/heroes/hooks/useHero";
 
 // const superheroData = {
 //   id: "1",
@@ -37,13 +38,7 @@ import { getHeroAction } from "./actions/get-hero.action";
 export default function SuperheroProfile() {
   const { idSlug = "" } = useParams();
 
-  const { data: superheroData, isError } = useQuery({
-    queryKey: ["Hero-data", { idSlug: idSlug }],
-    queryFn: () => getHeroAction(idSlug),
-    staleTime: 1000 * 60 * 5, //5 minutos
-    //retry evita que se vuelvan hacer intentos de llamar a la API
-    retry: false,
-  });
+  const { data: superheroData, isError } = useHero(idSlug);
 
   if (isError) {
     return <Navigate to="/" />;

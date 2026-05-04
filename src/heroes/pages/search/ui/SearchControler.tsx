@@ -1,8 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Filter, SortAsc, Grid, Plus } from "lucide-react";
+import { useRef } from "react";
+import { useSearchParams } from "react-router";
 
 const SearchControler = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  //creamos persistencia de la URL
+  const setQueryParams = (name: string, value: string) => {
+    setSearchParams((prev) => {
+      prev.set(name, value);
+      return prev;
+    });
+  };
+
+  const handlekeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      const value = inputRef.current?.value ?? "";
+      setQueryParams("name", value);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-4 mb-8">
@@ -10,8 +30,12 @@ const SearchControler = () => {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
           <Input
+            //usamos ref para obtener el elemento completo del imput, evitamos usar un useState
+            ref={inputRef}
             placeholder="Search heroes, villains, powers, teams..."
             className="pl-12 h-12 text-lg bg-white"
+            onKeyDown={handlekeyDown}
+            defaultValue={searchParams.get("name") ?? ""}
           />
         </div>
 

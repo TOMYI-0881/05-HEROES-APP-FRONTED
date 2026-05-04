@@ -7,6 +7,7 @@ interface Props {
   category: string;
 }
 
+//query para los tabs
 export const usePaginationHero = ({ page, limit, category }: Props) => {
   return useQuery({
     queryKey: ["heroes", { page: page, limit: limit, category: category }],

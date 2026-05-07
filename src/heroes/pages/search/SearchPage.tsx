@@ -12,8 +12,13 @@ export const SearchPage = () => {
   //valisdamos si hay un termino de busqueda para mostrar un mensaje diferente
   const hasSearch = name?.trim().length > 0;
 
+  const strength = searchParams.get("strength") ?? undefined;
+
   //llamamos API para mostrar datos filtrados por el termino de busqueda
-  const { data: heroesFilter = [] } = useHeroSearchFilterParams(name);
+  const { data: heroesFilter = [] } = useHeroSearchFilterParams({
+    name,
+    strength,
+  });
 
   //contenido dinamico dependiendo del estado de la busqueda
   let contenido = <span>busca un heroe por su nombre</span>;

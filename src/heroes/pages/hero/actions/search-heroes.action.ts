@@ -1,7 +1,7 @@
 import type { Hero } from "@/heroes/types/heroes.interface";
 import { HeroApi } from "../api/hero.api";
 
-interface Options {
+export interface Options {
   name?: string;
   team?: string;
   category?: string;

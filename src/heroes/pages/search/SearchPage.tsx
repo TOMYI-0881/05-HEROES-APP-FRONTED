@@ -13,11 +13,24 @@ export const SearchPage = () => {
   const hasSearch = name?.trim().length > 0;
 
   const strength = searchParams.get("strength") ?? undefined;
+  const team = searchParams.get("team") ?? undefined;
+  const category = searchParams.get("category") ?? undefined;
+  const universe = searchParams.get("universe") ?? undefined;
+  const status = searchParams.get("status") ?? undefined;
+
+  if (team === "Ninguno") team = undefined;
+  if (category === "Ninguno") category = undefined;
+  if (universe === "Ninguno") universe = undefined;
+  if (status === "Ninguno") status = undefined;
 
   //llamamos API para mostrar datos filtrados por el termino de busqueda
   const { data: heroesFilter = [] } = useHeroSearchFilterParams({
     name,
     strength,
+    team,
+    category,
+    universe,
+    status,
   });
 
   //contenido dinamico dependiendo del estado de la busqueda

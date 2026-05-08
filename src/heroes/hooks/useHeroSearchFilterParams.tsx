@@ -13,8 +13,19 @@ export const useHeroSearchFilterParams = ({
   universe,
 }: Options) => {
   return useQuery({
-    queryKey: ["Hero-data-filter", { name: name, strength: strength }],
-    queryFn: () => searchHeroAction({ name: name, strength: strength }),
+    queryKey: [
+      "Hero-data-filter",
+      { name: name, strength: strength, team, category, universe, status },
+    ],
+    queryFn: () =>
+      searchHeroAction({
+        name: name,
+        strength: strength,
+        team,
+        category,
+        universe,
+        status,
+      }),
     staleTime: 1000 * 60 * 5, //5 minutos
   });
 };

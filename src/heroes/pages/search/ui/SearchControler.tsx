@@ -7,6 +7,14 @@ import {
   AccordionContent,
   AccordionItem,
 } from "@/components/ui/accordion";
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/components/ui/combobox";
 
 import { useRef } from "react";
 import { useSearchParams } from "react-router";
@@ -33,6 +41,25 @@ const SearchControler = () => {
     }
   };
 
+  const teams = [
+    "Ninguno",
+    "Liga de la Justicia",
+    "Vengadores",
+    "X-Men",
+    "Batfamilia",
+    "Jóvenes Titanes",
+    "Solo",
+    "Suicide Squad",
+  ];
+  const category = ["Ninguno", "Hero", "Villain"];
+  const universe = ["Ninguno", "DC", "Marvel"];
+  const status = ["Ninguno", "Active", "Deceased"];
+
+  const teamsQuery = searchParams.get("team") ?? "";
+  const categoryQuery = searchParams.get("category") ?? "";
+  const universeQuery = searchParams.get("universe") ?? "";
+  const statusQuery = searchParams.get("status") ?? "";
+
   return (
     <>
       <div className="flex flex-col lg:flex-row gap-4 mb-8">
@@ -55,7 +82,7 @@ const SearchControler = () => {
             variant={
               activeAccordion === "advance-filters" ? "default" : "outline"
             }
-            className="h-12"
+            className="h-12 cursor-pointer"
             onClick={() => {
               if (activeAccordion === "advance-filters") {
                 setQueryParams("active-accordion", "");
@@ -103,27 +130,107 @@ const SearchControler = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Team</label>
-                  <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                    All teams
-                  </div>
+                  <Combobox
+                    items={teams}
+                    value={teamsQuery}
+                    onValueChange={(currentValue) => {
+                      if (currentValue === "Ninguno") {
+                        setQueryParams("team", "");
+                        return;
+                      }
+                      setQueryParams("team", currentValue ?? "");
+                    }}
+                  >
+                    <ComboboxInput placeholder="Select a team" />
+                    <ComboboxContent>
+                      <ComboboxEmpty>No items found.</ComboboxEmpty>
+                      <ComboboxList>
+                        {(item) => (
+                          <ComboboxItem key={item} value={item}>
+                            {item}
+                          </ComboboxItem>
+                        )}
+                      </ComboboxList>
+                    </ComboboxContent>
+                  </Combobox>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Category</label>
-                  <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                    All categories
-                  </div>
+                  <Combobox
+                    items={category}
+                    value={categoryQuery}
+                    onValueChange={(currentValue) => {
+                      if (currentValue === "Ninguno") {
+                        setQueryParams("category", "");
+                        return;
+                      }
+                      setQueryParams("category", currentValue ?? "");
+                    }}
+                  >
+                    <ComboboxInput placeholder="Select a category" />
+                    <ComboboxContent>
+                      <ComboboxEmpty>No items found.</ComboboxEmpty>
+                      <ComboboxList>
+                        {(item) => (
+                          <ComboboxItem key={item} value={item}>
+                            {item}
+                          </ComboboxItem>
+                        )}
+                      </ComboboxList>
+                    </ComboboxContent>
+                  </Combobox>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Universe</label>
-                  <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                    All universes
-                  </div>
+                  <Combobox
+                    items={universe}
+                    value={universeQuery}
+                    onValueChange={(currentValue) => {
+                      if (currentValue === "Ninguno") {
+                        setQueryParams("universe", "");
+                        return;
+                      }
+                      setQueryParams("universe", currentValue ?? "");
+                    }}
+                  >
+                    <ComboboxInput placeholder="Select a universe" />
+                    <ComboboxContent>
+                      <ComboboxEmpty>No items found.</ComboboxEmpty>
+                      <ComboboxList>
+                        {(item) => (
+                          <ComboboxItem key={item} value={item}>
+                            {item}
+                          </ComboboxItem>
+                        )}
+                      </ComboboxList>
+                    </ComboboxContent>
+                  </Combobox>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Status</label>
-                  <div className="h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                    All statuses
-                  </div>
+                  <Combobox
+                    items={status}
+                    value={statusQuery}
+                    onValueChange={(currentValue) => {
+                      if (currentValue === "Ninguno") {
+                        setQueryParams("status", "");
+                        return;
+                      }
+                      setQueryParams("status", currentValue ?? "");
+                    }}
+                  >
+                    <ComboboxInput placeholder="Select a status" />
+                    <ComboboxContent>
+                      <ComboboxEmpty>No items found.</ComboboxEmpty>
+                      <ComboboxList>
+                        {(item) => (
+                          <ComboboxItem key={item} value={item}>
+                            {item}
+                          </ComboboxItem>
+                        )}
+                      </ComboboxList>
+                    </ComboboxContent>
+                  </Combobox>
                 </div>
               </div>
               <div className="mt-4">

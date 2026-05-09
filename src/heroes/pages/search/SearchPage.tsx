@@ -18,10 +18,10 @@ export const SearchPage = () => {
   const universe = searchParams.get("universe") ?? undefined;
   const status = searchParams.get("status") ?? undefined;
 
-  if (team === "Ninguno") team = undefined;
-  if (category === "Ninguno") category = undefined;
-  if (universe === "Ninguno") universe = undefined;
-  if (status === "Ninguno") status = undefined;
+  // if (team === "Ninguno") team = undefined;
+  // if (category === "Ninguno") category = undefined;
+  // if (universe === "Ninguno") universe = undefined;
+  // if (status === "Ninguno") status = undefined;
 
   //llamamos API para mostrar datos filtrados por el termino de busqueda
   const { data: heroesFilter = [] } = useHeroSearchFilterParams({

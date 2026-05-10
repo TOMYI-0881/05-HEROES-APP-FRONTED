@@ -13,7 +13,7 @@ interface props { title: string; description?: string; }
 const CustomJumbotron = ({ title, description }: props) => {
   return (
     <div className="text-center mb-8">
-      <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
         <AuroraText>{title}</AuroraText>
       </h1>
       {description && (

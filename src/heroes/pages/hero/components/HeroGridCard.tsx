@@ -34,7 +34,7 @@ export const HeroGridCard = ({ heroe }: Props) => {
   };
 
   return (
-    <Card className="w-96 group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
+    <Card className="w-full max-w-md mx-auto sm:mx-0 group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-gray-50">
       <div className="relative h-64 ">
         <img
           onClick={handleClick}

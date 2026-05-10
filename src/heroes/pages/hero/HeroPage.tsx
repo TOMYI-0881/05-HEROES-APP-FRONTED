@@ -95,15 +95,15 @@ export default function SuperheroProfile() {
     <div className="min-h-screen bg-gray-50 pt-3 rounded-[60px]">
       {/* Header Banner */}
       <div className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
+            <div className="relative shrink-0">
               <img
                 src={superheroData.image || "/placeholder.svg"}
                 alt={superheroData.alias}
-                width={200}
-                height={200}
-                className="rounded-full border-4 border-white/20 shadow-2xl"
+                width={160}
+                height={160}
+                className="w-32 sm:w-40 md:w-48 rounded-full border-4 border-white/20 shadow-2xl"
               />
               <div className="absolute -top-2 -right-2">
                 <div className="bg-yellow-400 text-black rounded-full p-2">
@@ -134,11 +134,11 @@ export default function SuperheroProfile() {
                 </Badge>
               </div>
 
-              <h1 className="text-4xl md:text-6xl font-bold mb-2">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2">
                 {superheroData.alias}
               </h1>
-              <p className="text-xl text-blue-200 mb-4">{superheroData.name}</p>
-              <p className="text-lg text-gray-300 max-w-2xl">
+              <p className="text-base sm:text-xl text-blue-200 mb-4">{superheroData.name}</p>
+              <p className="text-sm sm:text-lg text-gray-300 max-w-2xl">
                 {superheroData.description}
               </p>
             </div>
@@ -166,7 +166,7 @@ export default function SuperheroProfile() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-8">
         <Tabs defaultValue="stats" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-8">
             <TabsTrigger value="stats" className="flex items-center gap-2">
               <Gauge className="w-4 h-4" />
               Estadísticas
@@ -268,51 +268,51 @@ export default function SuperheroProfile() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-24 text-sm font-medium">Fuerza</div>
+                  <div className="flex items-center gap-2 sm:gap-4">
+                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">Fuerza</div>
                     <div className="flex-1">
                       <Progress
                         value={superheroData.strength * 10}
-                        className="h-4"
+                        className="h-3 sm:h-4"
                       />
                     </div>
-                    <div className="w-12 text-right font-bold">
+                    <div className="w-10 sm:w-12 text-right text-xs sm:text-sm font-bold shrink-0">
                       {superheroData.strength}/10
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-24 text-sm font-medium">Inteligencia</div>
+                  <div className="flex items-center gap-2 sm:gap-4">
+                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">Inteligencia</div>
                     <div className="flex-1">
                       <Progress
                         value={superheroData.intelligence * 10}
-                        className="h-4"
+                        className="h-3 sm:h-4"
                       />
                     </div>
-                    <div className="w-12 text-right font-bold">
+                    <div className="w-10 sm:w-12 text-right text-xs sm:text-sm font-bold shrink-0">
                       {superheroData.intelligence}/10
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-24 text-sm font-medium">Velocidad</div>
+                  <div className="flex items-center gap-2 sm:gap-4">
+                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">Velocidad</div>
                     <div className="flex-1">
                       <Progress
                         value={superheroData.speed * 10}
-                        className="h-4"
+                        className="h-3 sm:h-4"
                       />
                     </div>
-                    <div className="w-12 text-right font-bold">
+                    <div className="w-10 sm:w-12 text-right text-xs sm:text-sm font-bold shrink-0">
                       {superheroData.speed}/10
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="w-24 text-sm font-medium">Resistencia</div>
+                  <div className="flex items-center gap-2 sm:gap-4">
+                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">Resistencia</div>
                     <div className="flex-1">
                       <Progress
                         value={superheroData.durability * 10}
-                        className="h-4"
+                        className="h-3 sm:h-4"
                       />
                     </div>
-                    <div className="w-12 text-right font-bold">
+                    <div className="w-10 sm:w-12 text-right text-xs sm:text-sm font-bold shrink-0">
                       {superheroData.durability}/10
                     </div>
                   </div>

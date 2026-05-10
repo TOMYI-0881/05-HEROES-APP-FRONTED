@@ -91,7 +91,7 @@ const SearchControler = () => {
         </div>
 
         {/* Action buttons */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <Button
             variant={
               activeAccordion === "advance-filters" ? "default" : "outline"
@@ -111,13 +111,13 @@ const SearchControler = () => {
               setQueryParams("active-accordion", "advance-filters");
             }}
           >
-            <Filter className="h-4 w-4 mr-2" />
-            Filters
+            <Filter className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Filters</span>
           </Button>
 
           <Button variant="outline" className="h-12">
-            <SortAsc className="h-4 w-4 mr-2" />
-            Sort by Name
+            <SortAsc className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Sort by Name</span>
           </Button>
 
           <Button variant="outline" className="h-12">
@@ -125,8 +125,8 @@ const SearchControler = () => {
           </Button>
 
           <Button className="h-12">
-            <Plus className="h-4 w-4 mr-2" />
-            Add Character
+            <Plus className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Add Character</span>
           </Button>
         </div>
       </div>

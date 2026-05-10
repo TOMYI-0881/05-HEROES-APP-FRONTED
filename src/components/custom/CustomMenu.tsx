@@ -21,19 +21,19 @@ const CustomMenu = () => {
   console.log({ pathname });
 
   return (
-    <NavigationMenu className="flex gap-1 ">
+    <NavigationMenu className="flex flex-wrap gap-2 sm:gap-1 justify-center sm:justify-start">
       <RainbowButton
         variant={hoverOne ? "default" : "outline"}
         onMouseEnter={() => setHoverOne(true)}
         onMouseLeave={() => setHoverOne(false)}
         onClick={() => navigate("/heroe")}
-      >incio</RainbowButton>
+      >Inicio</RainbowButton>
       <RainbowButton
         variant={hoverTwo ? "default" : "outline"}
         onMouseEnter={() => setHoverTwo(true)}
         onMouseLeave={() => setHoverTwo(false)}
         onClick={() => navigate("/search")}
-      >Busqueda de Heroe</RainbowButton>
+      >Buscar Héroe</RainbowButton>
     </NavigationMenu>
   );
 };

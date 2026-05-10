@@ -88,7 +88,7 @@ export const HomePage = () => {
 
       {/* Tabs */}
       <Tabs value={selectTab} className="mb-8">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="mb-8 grid w-full grid-cols-2 sm:grid-cols-4">
           <TabsTrigger
             value="all"
             onClick={() => handleSearchParams("all", "all")}

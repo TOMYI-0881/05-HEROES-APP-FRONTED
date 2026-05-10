@@ -1,3 +1,18 @@
+/**
+ * Contexto global para gestionar héroes favoritos.
+ * Los favoritos se persisten en localStorage bajo la clave "favorites".
+ *
+ * getFavoritesFromLocalStorage → función de inicialización que lee
+ * los favoritos guardados al cargar la aplicación.
+ *
+ * toggleFavorite:
+ *  - Si el héroe ya está en favoritos → lo elimina
+ *  - Si no está → lo agrega
+ *
+ * isFavorite → verifica si un héroe está en la lista por su id.
+ * El useEffect sincroniza automáticamente el estado con localStorage
+ * cada vez que cambia el array de favorites.
+ */
 import {
   createContext,
   useEffect,

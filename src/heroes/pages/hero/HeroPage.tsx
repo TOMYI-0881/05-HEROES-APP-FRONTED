@@ -1,12 +1,26 @@
+/**
+ * Página de detalle completo de un superhéroe/villano.
+ * Ruta: /heroe/:idSlug
+ * Obtiene el héroe por slug usando useHero(idSlug).
+ * Si hay error (isError), redirige a Home con <Navigate to="/" />.
+ * Mientras carga muestra "cargando....".
+ *
+ * Secciones con Tabs:
+ *  - Estadísticas: fuerza, inteligencia, velocidad, resistencia (barras + comparación)
+ *  - Poderes: grid de todos los poderes del personaje
+ *  - Equipo: afiliación del héroe
+ *  - Información: datos personales + información del universo
+ *
+ * También calcula el nivel de poder promedio (averagePower) y lo muestra
+ * con estrellas en el banner superior.
+ */
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
 import { Shield, Zap, Brain, Gauge, Users, Star, Award } from "lucide-react";
 import { Navigate, useParams } from "react-router";
-import { getHeroAction } from "./actions/get-hero.action";
 import { useHero } from "@/heroes/hooks/useHero";
 
 // const superheroData = {

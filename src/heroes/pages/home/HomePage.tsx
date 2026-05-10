@@ -1,3 +1,19 @@
+/**
+ * Página principal (Home) con dashboard, pestañas y paginación.
+ * Ruta: / (index)
+ *
+ * Secciones:
+ * 1. CustomJumbotron → encabezado con título animado
+ * 2. CustomBreadcrumbs → navegación (Home / super Heroes)
+ * 3. HeroStats → 4 tarjetas de resumen (total, favoritos, más fuerte, más inteligente)
+ * 4. Tabs → All Characters, Favorites, Heroes, Villains
+ * 5. HeroGrid → grilla de tarjetas filtrada por pestaña
+ * 6. CustomPagination → paginación (oculta en pestaña Favorites)
+ *
+ * Los parámetros de URL (section, page, limit, category) se gestionan
+ * con useHeroesSearchParams. Los datos vienen de usePaginationHero.
+ * Favorites no usa paginación porque los datos están en el contexto local.
+ */
 import { Heart } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CustomJumbotron from "@/components/custom/CustomJumbotron";

@@ -1,10 +1,14 @@
+/**
+ * Componente Jumbotron (hero banner) para encabezados de página.
+ * title → título principal con efecto AuroraText (gradiente animado de MagicUI)
+ * description → texto opcional con efecto TypingAnimation (máquina de escribir)
+ *
+ * Ambos efectos vienen de la librería MagicUI registrada en components.json.
+ */
 import { AuroraText } from "../ui/aurora-text";
 import { TypingAnimation } from "../ui/typing-animation";
 
-interface props {
-  title: string;
-  description?: string;
-}
+interface props { title: string; description?: string; }
 
 const CustomJumbotron = ({ title, description }: props) => {
   return (

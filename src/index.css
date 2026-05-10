@@ -1,3 +1,12 @@
+/**
+ * Estilos globales de la aplicación.
+ * Tailwind CSS v4 se configura mediante @import en lugar de tailwind.config.js.
+ * Se importan: tailwindcss, animaciones (tw-animate-css), tema shadcn/ui,
+ * y la fuente variable Geist de Fontsource.
+ *
+ * Las variables CSS se definen en :root (tema claro) y .dark (tema oscuro)
+ * mediante el sistema @theme inline de Tailwind v4.
+ */
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";

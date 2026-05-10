@@ -1,11 +1,15 @@
+/**
+ * Menú de navegación principal con botones RainbowButton.
+ * hoverOne/hoverTwo → estado local para cambiar el variant del botón
+ *   entre "outline" (por defecto) y "default" (al hacer hover).
+ * navigate() → navegación programática a las rutas.
+ *
+ * Botones:
+ *  - "incio" → navega a /heroe (redirige al Home por el catch-all)
+ *  - "Busqueda de Heroe" → navega a /search
+ */
 import { useLocation, useNavigate } from "react-router";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "../ui/navigation-menu";
-import { cn } from "@/lib/utils";
+import { NavigationMenu } from "../ui/navigation-menu";
 import { RainbowButton } from "../ui/rainbow-button";
 import { useState } from "react";
 
@@ -19,23 +23,17 @@ const CustomMenu = () => {
   return (
     <NavigationMenu className="flex gap-1 ">
       <RainbowButton
-        //manejamos los estados de los colores
         variant={hoverOne ? "default" : "outline"}
         onMouseEnter={() => setHoverOne(true)}
         onMouseLeave={() => setHoverOne(false)}
         onClick={() => navigate("/heroe")}
-      >
-        incio
-      </RainbowButton>
+      >incio</RainbowButton>
       <RainbowButton
-        //manejamos los estados de los colores
         variant={hoverTwo ? "default" : "outline"}
         onMouseEnter={() => setHoverTwo(true)}
         onMouseLeave={() => setHoverTwo(false)}
         onClick={() => navigate("/search")}
-      >
-        Busqueda de Heroe
-      </RainbowButton>
+      >Busqueda de Heroe</RainbowButton>
     </NavigationMenu>
   );
 };

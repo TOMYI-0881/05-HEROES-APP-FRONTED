@@ -1,3 +1,14 @@
+/**
+ * Dashboard de estadísticas principal.
+ * Muestra 4 tarjetas con datos resumidos:
+ * 1. Total de personajes (héroes + villanos)
+ * 2. Favoritos (con porcentaje del total)
+ * 3. Héroe más fuerte (alias + strength)
+ * 4. Héroe más inteligente (alias + intelligence)
+ *
+ * Los datos vienen de useHeroesSumary() (TanStack Query).
+ * El contador de favoritos viene del contexto FavoriteHeroContexx.
+ */
 import { Badge } from "@/components/ui/badge";
 import { Heart, Trophy, Users, Zap } from "lucide-react";
 import { HeroStatCard } from "./HeroStatCard";

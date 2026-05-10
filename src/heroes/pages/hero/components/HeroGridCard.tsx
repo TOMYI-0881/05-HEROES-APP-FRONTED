@@ -1,3 +1,13 @@
+/**
+ * Tarjeta individual de héroe para la grilla (HeroGrid).
+ * Muestra: imagen, indicador de estado (Active/Inactive), universo,
+ * botón de favoritos (corazón), botón de ver detalles, alias, nombre,
+ * categoría, equipo, descripción, estadísticas (barras de progreso),
+ * poderes (máximo 3 + badge "más"), y primera aparición.
+ *
+ * Al hacer clic en la imagen navega a /heroe/{slug} (detalle).
+ * Usa el contexto FavoriteHeroContexx para toggle de favoritos.
+ */
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";

@@ -1,3 +1,17 @@
+/**
+ * Panel de control de búsqueda con filtros avanzados.
+ * Persiste todos los filtros en los parámetros de búsqueda de la URL.
+ *
+ * Funcionalidad:
+ *  - Input de búsqueda por nombre (Enter para disparar la búsqueda)
+ *  - Botón Filters → toggle del acordeón de filtros avanzados
+ *  - Filtros avanzados: Team, Category, Universe, Status (Comboboxes)
+ *  - Slider de Minimum Strength (0-10)
+ *  - Botones: Sort by Name, Grid view, Add Character (placeholders)
+ *
+ * Los Comboboxes tienen valores predefinidos. Si se selecciona "Ninguno",
+ * se limpia el parámetro de la URL.
+ */
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";

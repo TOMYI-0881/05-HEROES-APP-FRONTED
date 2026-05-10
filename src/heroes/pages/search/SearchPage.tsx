@@ -1,3 +1,15 @@
+/**
+ * Página de búsqueda de superhéroes con filtros avanzados.
+ * Ruta: /search
+ *
+ * Lee los parámetros de la URL (name, strength, team, category, universe, status)
+ * y los pasa a useHeroSearchFilterParams para hacer la consulta al backend.
+ *
+ * Contenido dinámico:
+ *  - Sin búsqueda: "busca un heroe por su nombre"
+ *  - Búsqueda sin resultados: "no hay datos encontrado"
+ *  - Con resultados: HeroGrid con los héroes filtrados
+ */
 import CustomJumbotron from "@/components/custom/CustomJumbotron";
 import SearchControler from "./ui/SearchControler";
 import { HeroStats } from "../hero/components/HeroStats";

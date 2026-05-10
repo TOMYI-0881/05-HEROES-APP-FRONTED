@@ -1,3 +1,12 @@
+/**
+ * Componente de migas de pan (breadcrumbs) para navegación.
+ * breadCrumbs → array opcional de rutas intermedias ({label, to})
+ * currentPage → nombre de la página actual (último elemento, no clickeable)
+ *
+ * Ejemplo: Home / heroes / super Heroes
+ * Nota: key={Math.random()} no es ideal para rendimiento (re-renders),
+ * pero funciona para este caso de uso demostrativo.
+ */
 import {
   Breadcrumb,
   BreadcrumbItem,

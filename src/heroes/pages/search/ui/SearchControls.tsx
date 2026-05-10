@@ -1,3 +1,10 @@
+/**
+ * Versión anterior/placeholder de SearchControls.
+ * Actualmente no tiene lógica de filtrado real.
+ * Los valores son estáticos ("All teams", "All categories", etc.).
+ * Se mantiene como referencia, pero SearchControler (con filtros
+ * funcionales y Comboboxes) es la versión activa en SearchPage.
+ */
 import { Search, Filter, SortAsc, Grid, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

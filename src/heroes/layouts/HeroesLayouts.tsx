@@ -1,3 +1,9 @@
+/**
+ * Layout principal de la sección pública (/).
+ * Renderiza el menú de navegación (CustomMenu) en la parte superior
+ * y el contenido de la ruta hija mediante Outlet.
+ * Fondo con gradiente suave y contenedor centrado max-w-7xl.
+ */
 import CustomMenu from "@/components/custom/CustomMenu";
 import { Outlet } from "react-router";
 

@@ -24,9 +24,10 @@ import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs";
 import { useHeroesSumary } from "@/heroes/hooks/useHeroesSumary";
 import { usePaginationHero } from "@/heroes/hooks/usePaginationHero";
 import { useHeroesSearchParams } from "@/heroes/hooks/useHeroesSearchParams";
-import { use, useEffect } from "react";
+import { use } from "react";
 import { FavoriteHeroContexx } from "@/heroes/context/FavoriteHeroContext";
-import { toast, Toaster } from "sonner";
+import { Toaster } from "sonner";
+import { CustomTarjets } from "@/components/custom/CustomTarjets";
 
 export const HomePage = () => {
   const { favoriteCount, favorites } = use(FavoriteHeroContexx);
@@ -67,15 +68,6 @@ export const HomePage = () => {
   const { data: heroesSummary, isLoading } = useHeroesSumary();
 
   console.log({ isLoading });
-
-  useEffect(() => {
-    if (isLoading) {
-      const id = toast.loading("cargando datos del backend...");
-      return () => {
-        toast.dismiss(id);
-      };
-    }
-  }, [isLoading]);
 
   return (
     <>
@@ -133,19 +125,35 @@ export const HomePage = () => {
 
         <TabsContent value="all">
           {/* Hero Cards */}
-          <HeroGrid heroes={heroesResponse?.heroes ?? []} />
+          {isLoading ? (
+            <CustomTarjets limit={+limit} />
+          ) : (
+            <HeroGrid heroes={heroesResponse?.heroes ?? []} />
+          )}
         </TabsContent>
         <TabsContent value="favorites">
           {/* Hero Cards */}
-          <HeroGrid heroes={favorites} />
+          {isLoading ? (
+            <CustomTarjets limit={+limit} />
+          ) : (
+            <HeroGrid heroes={favorites} />
+          )}
         </TabsContent>
         <TabsContent value="heroes">
           {/* Hero Cards */}
-          <HeroGrid heroes={heroesResponse?.heroes ?? []} />
+          {isLoading ? (
+            <CustomTarjets limit={+limit} />
+          ) : (
+            <HeroGrid heroes={heroesResponse?.heroes ?? []} />
+          )}
         </TabsContent>
         <TabsContent value="villains">
           {/* Hero Cards */}
-          <HeroGrid heroes={heroesResponse?.heroes ?? []} />
+          {isLoading ? (
+            <CustomTarjets limit={+limit} />
+          ) : (
+            <HeroGrid heroes={heroesResponse?.heroes ?? []} />
+          )}
         </TabsContent>
       </Tabs>
 

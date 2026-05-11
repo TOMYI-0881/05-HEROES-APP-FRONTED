@@ -134,7 +134,7 @@ export const HomePage = () => {
         <TabsContent value="favorites">
           {/* Hero Cards */}
           {isLoading ? (
-            <CustomTarjets limit={+limit} />
+            <CustomTarjets limit={favoriteCount} />
           ) : (
             <HeroGrid heroes={favorites} />
           )}

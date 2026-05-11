@@ -16,9 +16,15 @@ import { HeroStats } from "../hero/components/HeroStats";
 import { HeroGrid } from "../hero/components/HeroGrid";
 import { useHeroSearchFilterParams } from "@/heroes/hooks/useHeroSearchFilterParams";
 import { useSearchParams } from "react-router";
+import { useHeroesSumary } from "@/heroes/hooks/useHeroesSumary";
+import { useEffect } from "react";
+import { toast, Toaster } from "sonner";
 
 export const SearchPage = () => {
   const [searchParams] = useSearchParams();
+
+  //llamamos API para usar el parametro isLoading
+  const { isLoading } = useHeroesSumary();
 
   const name = searchParams.get("name") ?? "";
   //valisdamos si hay un termino de busqueda para mostrar un mensaje diferente
@@ -29,11 +35,6 @@ export const SearchPage = () => {
   const category = searchParams.get("category") ?? undefined;
   const universe = searchParams.get("universe") ?? undefined;
   const status = searchParams.get("status") ?? undefined;
-
-  // if (team === "Ninguno") team = undefined;
-  // if (category === "Ninguno") category = undefined;
-  // if (universe === "Ninguno") universe = undefined;
-  // if (status === "Ninguno") status = undefined;
 
   //llamamos API para mostrar datos filtrados por el termino de busqueda
   const { data: heroesFilter = [] } = useHeroSearchFilterParams({
@@ -55,8 +56,19 @@ export const SearchPage = () => {
     contenido = <HeroGrid heroes={heroesFilter} />;
   }
 
+  //efecto para mostrar un toast de carga mientras se obtienen los datos del backend
+  useEffect(() => {
+    if (isLoading) {
+      const id = toast.loading("cargando datos del backend...");
+      return () => {
+        toast.dismiss(id);
+      };
+    }
+  }, [isLoading]);
+
   return (
     <>
+      <Toaster duration={4000} />
       <CustomJumbotron
         title="Busqueda de SuperHeroes"
         descriptionDesktop="Descrubre, explora y administra super heroes y villanos"

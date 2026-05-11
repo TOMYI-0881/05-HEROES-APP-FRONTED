@@ -8,6 +8,7 @@ interface Props {
 }
 
 export const CustomTarjets = ({ limit }: Props) => {
+  //efecto para mostrar un toast de carga mientras se obtienen los datos del backend
   useEffect(() => {
     const id = toast.loading("cargando datos del backend...");
     console.log("cargando datos del backend...");

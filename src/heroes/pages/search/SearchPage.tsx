@@ -59,7 +59,8 @@ export const SearchPage = () => {
     <>
       <CustomJumbotron
         title="Busqueda de SuperHeroes"
-        description="Descrubre, explora y administra super heroes y villanos"
+        descriptionDesktop="Descrubre, explora y administra super heroes y villanos"
+        descriptionMobile="Explora y administra héroes"
       />
 
       {/* Stats Dashboard */}

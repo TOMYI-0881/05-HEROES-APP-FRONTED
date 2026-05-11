@@ -28,7 +28,7 @@ interface Props {
 const CustomBreadcrumbs = ({ currentPage, breadCrumbs = [] }: Props) => {
   const navigate = useNavigate();
   return (
-    <Breadcrumb className="mb-4 cursor-pointer">
+    <Breadcrumb className="mb-4 cursor-pointer mt-0">
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>

@@ -24,8 +24,9 @@ import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs";
 import { useHeroesSumary } from "@/heroes/hooks/useHeroesSumary";
 import { usePaginationHero } from "@/heroes/hooks/usePaginationHero";
 import { useHeroesSearchParams } from "@/heroes/hooks/useHeroesSearchParams";
-import { use } from "react";
+import { use, useEffect } from "react";
 import { FavoriteHeroContexx } from "@/heroes/context/FavoriteHeroContext";
+import { toast, Toaster } from "sonner";
 
 export const HomePage = () => {
   const { favoriteCount, favorites } = use(FavoriteHeroContexx);
@@ -63,14 +64,27 @@ export const HomePage = () => {
   // ]);
 
   //llamamos API para mostrar datos de los TABS
-  const { data: heroesSummary } = useHeroesSumary();
+  const { data: heroesSummary, isLoading } = useHeroesSumary();
+
+  console.log({ isLoading });
+
+  useEffect(() => {
+    if (isLoading) {
+      const id = toast.loading("cargando datos del backend...");
+      return () => {
+        toast.dismiss(id);
+      };
+    }
+  }, [isLoading]);
 
   return (
     <>
+      <Toaster duration={4000} />
       {/* Header */}
       <CustomJumbotron
         title="Universo de los SuperHeroes"
-        description="Descrubre, explora y administra super heroes y villanos"
+        descriptionDesktop="Descrubre, explora y administra super heroes y villanos"
+        descriptionMobile="Explora y administra héroes"
       />
 
       <CustomBreadcrumbs

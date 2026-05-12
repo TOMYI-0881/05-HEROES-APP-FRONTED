@@ -22,6 +22,7 @@ import { cn } from "@/lib/utils";
 import { Shield, Zap, Brain, Gauge, Users, Star, Award } from "lucide-react";
 import { Navigate, useParams } from "react-router";
 import { useHero } from "@/heroes/hooks/useHero";
+import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs";
 
 // const superheroData = {
 //   id: "1",
@@ -95,6 +96,12 @@ export default function SuperheroProfile() {
     <div className="min-h-screen bg-gray-50 pt-3 rounded-[60px]">
       {/* Header Banner */}
       <div className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white">
+        <CustomBreadcrumbs
+          colorHome="white"
+          colorCurrentPage="white"
+          currentPage={superheroData.alias}
+          breadCrumbs={[{ label: "super Heroes", to: "/" }]}
+        />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
             <div className="relative shrink-0">
@@ -137,7 +144,9 @@ export default function SuperheroProfile() {
               <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-2">
                 {superheroData.alias}
               </h1>
-              <p className="text-base sm:text-xl text-blue-200 mb-4">{superheroData.name}</p>
+              <p className="text-base sm:text-xl text-blue-200 mb-4">
+                {superheroData.name}
+              </p>
               <p className="text-sm sm:text-lg text-gray-300 max-w-2xl">
                 {superheroData.description}
               </p>
@@ -269,7 +278,9 @@ export default function SuperheroProfile() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 sm:gap-4">
-                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">Fuerza</div>
+                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">
+                      Fuerza
+                    </div>
                     <div className="flex-1">
                       <Progress
                         value={superheroData.strength * 10}
@@ -281,7 +292,9 @@ export default function SuperheroProfile() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 sm:gap-4">
-                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">Inteligencia</div>
+                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">
+                      Inteligencia
+                    </div>
                     <div className="flex-1">
                       <Progress
                         value={superheroData.intelligence * 10}
@@ -293,7 +306,9 @@ export default function SuperheroProfile() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 sm:gap-4">
-                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">Velocidad</div>
+                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">
+                      Velocidad
+                    </div>
                     <div className="flex-1">
                       <Progress
                         value={superheroData.speed * 10}
@@ -305,7 +320,9 @@ export default function SuperheroProfile() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 sm:gap-4">
-                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">Resistencia</div>
+                    <div className="w-16 sm:w-24 text-xs sm:text-sm font-medium shrink-0">
+                      Resistencia
+                    </div>
                     <div className="flex-1">
                       <Progress
                         value={superheroData.durability * 10}

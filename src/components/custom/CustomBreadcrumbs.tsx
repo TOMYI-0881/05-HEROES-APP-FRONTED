@@ -13,6 +13,7 @@ import {
   BreadcrumbLink,
   BreadcrumbList,
 } from "@/components/ui/breadcrumb";
+import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router";
 
 interface Breadcrum {
@@ -23,28 +24,51 @@ interface Breadcrum {
 interface Props {
   currentPage: string;
   breadCrumbs?: Breadcrum[];
+  colorCurrentPage?: string;
+  colorHome?: string;
+  colorBreadCrumbs?: string;
 }
 
-const CustomBreadcrumbs = ({ currentPage, breadCrumbs = [] }: Props) => {
+const CustomBreadcrumbs = ({
+  currentPage,
+  breadCrumbs = [],
+  colorCurrentPage,
+  colorHome,
+  colorBreadCrumbs,
+}: Props) => {
   const navigate = useNavigate();
   return (
     <Breadcrumb className="mb-4 cursor-pointer mt-0">
       <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        <BreadcrumbItem className={`text-${colorHome || "gray-400"}`}>
+          <BreadcrumbLink href="/" className="hover:text-gray-400">
+            Home
+          </BreadcrumbLink>
         </BreadcrumbItem>
         /
         {breadCrumbs.map((crumb) => (
-          <div className="flex items-center" key={Math.random()}>
+          <div
+            className={cn(
+              `flex items-center text-${colorBreadCrumbs || "white"}`,
+            )}
+            key={Math.random()}
+          >
             <BreadcrumbItem>
-              <BreadcrumbLink onClick={() => navigate(crumb.to)}>
+              <BreadcrumbLink
+                onClick={() => navigate(crumb.to)}
+                className={`hover:text-${colorBreadCrumbs || "white"} hover:text-gray-400`}
+              >
                 {crumb.label} /
               </BreadcrumbLink>
             </BreadcrumbItem>
           </div>
         ))}
         <BreadcrumbItem>
-          <BreadcrumbLink className="text-black">{currentPage}</BreadcrumbLink>
+          <BreadcrumbLink
+            className={`text-${colorCurrentPage || "black"}hover:text-gray-400`}
+          >
+            {currentPage}
+          </BreadcrumbLink>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>

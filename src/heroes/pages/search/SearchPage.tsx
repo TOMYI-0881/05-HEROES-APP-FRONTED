@@ -19,6 +19,8 @@ import { useSearchParams } from "react-router";
 import { useHeroesSumary } from "@/heroes/hooks/useHeroesSumary";
 import { useEffect } from "react";
 import { toast, Toaster } from "sonner";
+import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 export const SearchPage = () => {
   const [searchParams] = useSearchParams();
@@ -47,11 +49,27 @@ export const SearchPage = () => {
   });
 
   //contenido dinamico dependiendo del estado de la busqueda
-  let contenido = <span>busca un heroe por su nombre</span>;
+  let contenido = (
+    <Card size="sm" className="mx-auto mt-0 max-w-md text-center">
+      <CardContent className="py-6">
+        <span className={cn("block text-base text-muted-foreground")}>
+          🦸‍♂️ busca un heroe por su nombre
+        </span>
+      </CardContent>
+    </Card>
+  );
 
   //si hay un termino de busqueda pero no hay resultados, mostramos un mensaje diferente
   if (hasSearch && heroesFilter.length === 0) {
-    contenido = <span>no hay datos encontrado</span>;
+    contenido = (
+      <Card size="sm" className="mx-auto mt-0 max-w-md text-center">
+        <CardContent className="py-6">
+          <span className={cn("block text-base text-muted-foreground")}>
+            🕵️‍♂️ no hay datos encontrado
+          </span>
+        </CardContent>
+      </Card>
+    );
   } else if (heroesFilter.length > 0) {
     contenido = <HeroGrid heroes={heroesFilter} />;
   }

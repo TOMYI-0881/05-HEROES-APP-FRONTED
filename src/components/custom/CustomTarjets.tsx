@@ -1,9 +1,30 @@
+/**
+ * CustomTarjets — Componente de esqueleto (skeleton) para carga de héroes.
+ *
+ * Propósito:
+ *  - Muestra una cuadrícula de placeholders con skeleton mientras se
+ *    obtienen los datos del backend.
+ *  - Uso típico: reemplazar el contenido real durante `isLoading`.
+ *
+ * Props:
+ *  - limit: número de tarjetas skeleton a renderizar.
+ *
+ * Layout:
+ *  - Grid responsive: 1 col móvil, 2 tablet, 3 desktop.
+ *  - Cada skeleton simula una Card con header (título + subtítulo)
+ *    y contenido (imagen aspect-video + líneas de texto).
+ *
+ * Efecto:
+ *  - Muestra un toast.loading al montarse y lo descarta al desmontarse.
+ */
+
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
+  /** Número de tarjetas skeleton a renderizar */
   limit: number;
 }
 

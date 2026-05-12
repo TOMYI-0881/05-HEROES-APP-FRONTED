@@ -99,6 +99,7 @@ export default function SuperheroProfile() {
         <CustomBreadcrumbs
           colorHome="white"
           colorCurrentPage="white"
+          colorBreadCrumbs="white"
           currentPage={superheroData.alias}
           breadCrumbs={[{ label: "super Heroes", to: "/" }]}
         />

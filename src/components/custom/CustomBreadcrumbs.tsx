@@ -40,35 +40,35 @@ const CustomBreadcrumbs = ({
   return (
     <Breadcrumb className="mb-4 cursor-pointer mt-0">
       <BreadcrumbList>
-        <BreadcrumbItem className={`text-${colorHome || "gray-400"}`}>
+        <BreadcrumbItem
+          className={cn(!colorHome && "text-gray-400")}
+          style={colorHome ? { color: colorHome } : undefined}
+        >
           <BreadcrumbLink href="/" className="hover:text-gray-400">
             Home
           </BreadcrumbLink>
         </BreadcrumbItem>
         /
         {breadCrumbs.map((crumb) => (
-          <div
-            className={cn(
-              `flex items-center text-${colorBreadCrumbs || "white"}`,
-            )}
-            key={Math.random()}
-          >
+          <div key={Math.random()}>
             <BreadcrumbItem>
               <BreadcrumbLink
                 onClick={() => navigate(crumb.to)}
-                className={`hover:text-${colorBreadCrumbs || "white"} hover:text-gray-400`}
+                className="hover:text-gray-400"
+                style={
+                  colorBreadCrumbs ? { color: colorBreadCrumbs } : undefined
+                }
               >
                 {crumb.label} /
               </BreadcrumbLink>
             </BreadcrumbItem>
           </div>
         ))}
-        <BreadcrumbItem>
-          <BreadcrumbLink
-            className={`text-${colorCurrentPage || "black"}hover:text-gray-400`}
-          >
-            {currentPage}
-          </BreadcrumbLink>
+        <BreadcrumbItem
+          className={cn(!colorCurrentPage && "text-black")}
+          style={colorCurrentPage ? { color: colorCurrentPage } : undefined}
+        >
+          <BreadcrumbLink className="pointer-events-none hover:text-inherit">{currentPage}</BreadcrumbLink>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
